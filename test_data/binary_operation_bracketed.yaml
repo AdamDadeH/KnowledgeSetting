@@ -1,0 +1,102 @@
+---
+binary_operation:
+  type: definition
+  title: Binary Operation
+  notation: binary operation $∆function_name$ on $∆set$.
+  depends_on:
+    - set
+    - function
+    - cartesian_product
+  properties:
+    - function_name
+    - set
+  inline_content: |
+    function $∆function_name: ∆set \times ∆set \rightarrow ∆set$
+  content: |
+    A binary operation $b$ on a set $X$ is a [[function(b,[[cartesian_product(X,X)]],X)]].
+  is_a:
+    - function
+---
+binary_operation.integer:
+  type: definition
+  title: Binary Operation on $\mathbb{Z}$
+  notation: |
+     [[binary_operation(∆function_name, \mathbb{Z})]]
+  depends_on:
+    - set
+    - function
+    - cartesian_product
+  properties:
+    - function_name
+  inline_content: |
+     [[binary_operation(∆function_name, \mathbb{Z})]]
+  content: |
+     [[binary_operation(b, \mathbb{Z})]]
+  is_a:
+    - binary_operation
+---
+binary_operation.commutative:
+  # A condition on function of two identical arguments (often restricted to binary ops)
+  type: definition
+  title: Commutative
+  depends_on:
+    - binary_operation
+  properties:
+    - b
+    - set
+  notation: commutative
+  inline_content: |
+    $∆b(x,y) = ∆b(y,x)$ for all $x,y \in ∆set$
+  content: |-1
+   A [[binary_operation(b, X)]] is commutative iff $b(x,y) = b(y,x)$ for all $x,y \in X$
+---
+associative:
+  type: definition
+  title: Associative
+  depends_on:
+    - binary_operation
+  content: |-1
+   A [[binary_operation(b, X)]] is associative if
+   $b(x, b(y, z)) = b(b(x, y), z)$ for all $x,y,z \in X$
+---
+jordan_type_binary_op:
+  type: definition
+  title: Jordan Type Binary Operation
+  depends_on:
+    - binary_operation
+    - binary_operation.commutative
+  content: |-1
+   A jordan type [[binary_operation(b, X)]] satisfies
+
+   * $xy = yx$ for all  $x,y \in X$
+   * $(xy)(xx) = (x(y(xx)))$ for all $x,y \in X$
+---
+power_associativity:
+  type: definition
+  title: Power Associativity
+  depends_on:
+    - binary_operation
+  content: |-1
+   A [[binary_operation(b, X)]] such that $x^n$ is uniquely defined for all $x \in X$
+   so
+
+   * $x(xx) = (xx)x$
+   * $x(x(xx)) = (xx)(xx) = ..$
+---
+alternative_associativity:
+  type: definition
+  title: Alternative Associativity
+  depends_on:
+    - binary_operation
+  content: |-1
+   A [[binary_operation(b, X)]] such that $x(xy) = (xx)y$ and $y(xx)=(yx)x$ for
+   all $x,y \in X$
+---
+identity:
+  type: definition
+  title: Identity
+  depends_on:
+    - binary_operation
+  content: |
+    Given a [[binary_operation(b,X)]], $e \in X$ is an identify element iff $b(x, e) = b(e, x) = x$ for all $x \in X$
+

@@ -1,0 +1,223 @@
+set:
+  type: definition
+  title: Set
+  notation:
+  depends_on:
+  inline_content: set
+  content:
+
+element_of:
+  type: definition
+  title: Element of
+  notation:
+    ∆element \in ∆set
+  properties:
+    - element
+    - set
+  content:
+---
+subset:
+  depends_on:
+    - set
+---
+proper_subset:
+  type: definition
+  title: Proper Subset
+  depends_on:
+    - set
+    - subset
+  content: |
+    A set $A$ is a proper subset of a set $B$ iff $[[subset(A, B)]]$ and $\exists a \in A$ such
+    that $a \notin B$
+  properties:
+    - set1
+    - set2
+  notation:
+    ∆set1 \subset ∆set2
+---
+intersection:
+  type: definition
+  title: Intersection
+  inline_content: |
+    $\{ x | x \in U \mathrm{and}\; x \in V \}$
+  content: 
+    Given sets U and V the intersection is $U \cap V = \{ x | x \in U \mathrm{and}\; x \in V \}$
+  properties:
+    - set1
+    - set2
+  notation: ∆set1 \cap ∆set2
+  depends_on:
+    - set
+
+intersection.indexed:
+  type: definition
+  title: Intersection of Indexed Family
+  content:
+    Given [[set]] $U_a$ indexed by $a \in A$ the intersection.
+    $\cap_{a\in A} U_a = \{ x | x \in U_a \; \forall a \in A\}$
+  properties:
+    - family_name
+    - index_set
+    - single_index
+  notation: \cap_{∆single_index \in ∆index_set} ∆family_name_{∆index_set}
+  depends_on:
+    - set
+
+disjoint:
+  type: definition
+  title: Disjoint
+  notation: |
+    [[intersection(∆set1,∆set2)]] = [[empty_set]]
+  properties:
+    - set1
+    - set2
+  depends_on:
+    - set
+    - intersection
+    - empty_set
+  content: |
+    Sets $U$ and $V$ are disjoint iff $[[intersection(U,V)]] = [[empty_set]]$
+
+partition:
+  type: definition
+  title: Partition
+  content: |-1
+   A partition of a set $X$ is a set $P$ of subsets of $X$ such that
+   Each $U \in P$ is non-empty. Any pairs of sets $U,V \in P$ are disjoint.
+   $X = \cup_{U \in P} U$.
+
+cartesian_product:
+  #I want this to take array inputs and handle
+  title: Cartesian Product
+  properties:
+    - set1
+    - set2
+  notation: ∆set1 \times ∆set2
+  depends_on:
+    - set
+  type: definition
+  content: |
+    $X \times Y = \{ (x,y) | x \in X, y \in Y\}$
+
+n_ary_relation:
+  title: n-ary relation
+  depends_on:
+    - cartesian_product
+    - set
+    - subset
+  type: definition
+  content: |-1
+   An n-ary relation on $A_1, A_2, .., A_n$ is a subset of the
+   cartesian product $A_1 \times A_2 \times .. \times A_n$
+
+equivalence_relation:
+  title: Equivalence Relation
+  depends_on:
+    - cartesian_product
+    - set
+    - subset
+  type: definition
+  content: |-1
+   An equivalence relation on $A$ is a subset $R \subset A \times A$ such that
+
+   1. $(a, a) \in R$ for all $a \in A$ \\
+   2. $(a, b) \in R \Rightarrow (b, a) \in R$ \\
+   3. $(a,b) \in R, (b,c) \in R \Rightarrow (a,c) in R$ \\
+  is_a:
+    - binary_relation
+
+bijection:
+  title: Bijection
+  depends_on:
+    - function
+    - set
+  type: definition
+
+power_set:
+  title: Power Set
+  depends_on:
+    - set
+    - subset
+  type: definition
+  properties:
+    - set
+  notation: \mathcal{P}(∆set)
+  content: |-1
+   The power set of a set $X$ is the set of all subsets of $X$.
+   Unary function $\mathcal{P} : Set \rightarrow Set$
+
+complement:
+  title: Complement
+  depends_on:
+    - set
+    - subset
+  type: definition
+  properties:
+    - set1
+    - set2
+  notation: ∆set1 - ∆set2
+  content: Given a set $X$ and $A \subseteq X$, $X - A = \{x | x \in X, x \notin A\}$
+
+union:
+  title: Set Union
+  type: definition
+  depends_on:
+    - set
+
+empty_set:
+  title: Empty Set
+  type: definition
+  notation: \varnothing
+  depends_on:
+    - set
+  content:
+    The empty set - $\varnothing$.
+
+natural_numbers:
+  title: Natural Numbers
+  depends_on:
+    - set
+  type: definition
+  content: |-1
+   The counting numbers 0, 1, 2, 3, ..
+
+integers:
+  title: Integers
+  depends_on:
+    - set
+  type: definition
+  content: |-1
+
+finite:
+  title: Finite
+  type: definition
+  depends_on:
+    - set
+    - natural_numbers
+    - bijection
+    - function
+  content: |-1
+   A set X is finite if there exists a bijection between the set of
+   natural numbers $[1,N]$ and $X$.
+
+countable:
+  title: Countable
+  type: definition
+  depends_on:
+    - set
+    - natural_numbers
+    - bijection
+  content: |-1
+   A set $X$ is countable is there exists a bijection between $\mathbb{N}$ and $X$.
+---
+subset:
+  title: Subset
+  type: definition
+  properties:
+    - set1
+    - set2
+  notation:
+    ∆set1 \subseteq ∆set2
+  content: |
+    A set $A$ is a subset of of set $B$, $A \subseteq B$ iff forall $[[element_of(a, A)]]$, $[[element_of(a, B)]]$
+---
